@@ -7,7 +7,13 @@ const snake = [
   { x: 11, y: 13 },
 ];
 export function update() {
-  console.log("update snake");
+  // position body
+  for (let index = snake.length - 2; index >= 0; index--) {
+    snake[index + 1] = { ...snake[index] };
+  }
+  // position head
+  snake[0].x += 1;
+  snake[0].y += 0;
 }
 export function draw(board) {
   console.log("snake draw board:", board);

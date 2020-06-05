@@ -1,30 +1,44 @@
 import {
-  SNAKE_SPEED_FAKTOR,
   update as updateSnake,
   draw as drawSnake,
+  SNAKE_SPEED,
 } from "./snake.js";
+//import { update as updateFood, draw as drawFood } from './food.js'
+// import { outsideGrid } from './grid.js'
 
-// 23CFfc#@*+"1213231
-const boardElm = document.getElementById("board");
-console.log("board:", boardElm);
-let lastRenderTime = 0;
+let lastRenderedMiliseconds = 0;
+let gameOver = false;
+const gameBoard = document.getElementById("board");
 
-function main(frameTime) {
-  // call animation
-  //window.requestAnimationFrame(main);
-  // calculate elapsed time
-  const lastRenderTimeSecs = frameTime - lastRenderTime / 1000;
-  if (lastRenderTimeSecs < SNAKE_SPEED_FAKTOR) return;
-  console.log(frameTime);
-  lastRenderTime = frameTime;
+function main(currentMiliSeconds) {
+  window.requestAnimationFrame(main);
+
+  const LastRenderedSecond = getLastRenderTimeSeconds(currentMiliSeconds);
+
+  if (LastRenderedSecond < 1 / SNAKE_SPEED) return;
+
+  lastRenderedMiliseconds = currentMiliSeconds;
+
   update();
   draw();
 }
+
 window.requestAnimationFrame(main);
 
 function update() {
   updateSnake();
+  //updateFood()
+  checkDeath();
 }
+
 function draw() {
-  drawSnake(boardElm);
+  gameBoard.innerHTML = "";
+  drawSnake(gameBoard);
+  // drawFood(gameBoard)
+}
+function getLastRenderTimeSeconds(miliSeconds) {
+  return (miliSeconds - lastRenderedMiliseconds) / 1000;
+}
+function checkDeath() {
+  // gameOver = outsideGrid(getSnakeHead()) || snakeIntersection()
 }
