@@ -1,10 +1,6 @@
-import {
-  update as updateSnake,
-  draw as drawSnake,
-  SNAKE_SPEED,
-} from "./snake.js";
-//import { update as updateFood, draw as drawFood } from './food.js'
-// import { outsideGrid } from './grid.js'
+// 23CFfc#@*+"1213231
+import { update as updateSnake, draw as drawSnake } from "./snake.js";
+import { SNAKE_SPEED } from "./constants.js";
 
 let lastRenderedMiliseconds = 0;
 let gameOver = false;
